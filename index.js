@@ -28,6 +28,11 @@ async function run() {
     const eventCollections = client.db("volunteersNetworkDB").collection("events");
 
 
+    app.get("/events", async(req,res)=>{
+        const result = await eventCollections.find().toArray();
+        res.send(result);
+    })
+
     app.post("/events", async(req,res)=>{
         const events = req.body;
         const result = await eventCollections.insertOne(events);
